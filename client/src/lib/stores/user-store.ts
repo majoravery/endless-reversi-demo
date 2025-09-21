@@ -2,11 +2,11 @@ import { emit } from "$lib/socket";
 import { writable } from "svelte/store";
 
 interface UserState {
-  team: Team | null;
+  teamName: TeamName | null;
 }
 
 const initialState: UserState = {
-  team: null,
+  teamName: null,
 };
 
 function createUserStore() {
@@ -15,12 +15,12 @@ function createUserStore() {
   return {
     subscribe,
 
-    joinTeam: (team: Team) => {
+    joinTeam: (teamName: TeamName) => {
       update((state) => {
-        emit("join-team", { team });
+        emit("join-team", { teamName });
         const newState = {
           ...state,
-          team,
+          teamName,
         };
 
         return newState;
@@ -29,14 +29,14 @@ function createUserStore() {
 
     leaveTeam: () => {
       update((state) => {
-        if (!state.team) {
+        if (!state.teamName) {
           return state;
         }
 
         emit("leave-team", {
-          team: state.team,
+          teamName: state.teamName,
         });
-        return { ...state, team: null };
+        return { ...state, teamName: null };
       });
     },
   };

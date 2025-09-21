@@ -9,7 +9,13 @@ declare global {
     // interface Platform {}
   }
 
-  type Team = "black" | "white";
+  type Board = Array<Int8Array>;
+  type Coordinate = number;
+  type Coordinates = [Coordinate, Coordinate];
+  type TeamName = "black" | "white";
+  type TeamPiece = 1 | -1;
+
+  type ServerState = Record<string, any>;
 }
 
 export {};
